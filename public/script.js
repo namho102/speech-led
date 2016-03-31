@@ -14,9 +14,7 @@ recognition.maxAlternatives = 1;
 
 var socket = io();
 
-
 var diagnostic = document.querySelector('.output');
-var bg = document.querySelector('html');
 
 document.body.onclick = function() {
   recognition.start();
@@ -36,7 +34,6 @@ recognition.onresult = function(event) {
   var command = event.results[0][0].transcript;
   socket.emit('command', command);
   diagnostic.textContent = 'Result received: ' + command + '.';
-  // bg.style.backgroundColor = color;
   console.log('Confidence: ' + event.results[0][0].confidence);
 }
 

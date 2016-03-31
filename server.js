@@ -1,9 +1,10 @@
+//Express server
 var express = require('express');
-
 var app = express();
 var server = require('http').Server(app);
+//Socket.io
 var io = require('socket.io')(server);
-
+//Johnny-five
 var five = require("johnny-five");
 var board = new five.Board();
 var led;
@@ -20,13 +21,10 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-
-
 board.on("ready", function() {
 	led = new five.Led(13);
   	led.blink(); 
 });
-
 
 io.on('connection', function(socket){
   console.log('a user connected');
